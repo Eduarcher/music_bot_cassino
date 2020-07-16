@@ -5,10 +5,6 @@ from discord.ext.commands import command
 # TODO: CREATE PLAYLIST SUPPORT FOR MUSIC
 
 
-# flat-playlist:True?
-# |
-# |
-# extract_flat:True
 ytdl_format_options = {
     'format': 'bestaudio/best',
     'outtmpl': '{}',
@@ -18,7 +14,6 @@ ytdl_format_options = {
     'ignoreerrors': True,
     'logtostderr': False,
     "extractaudio": True,
-
     "audioformat": "opus",
     'quiet': True,
     'no_warnings': True,
