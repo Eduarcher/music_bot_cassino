@@ -1,18 +1,21 @@
-import discord, asyncio, youtube_dl, os
+import discord
 from discord.ext import commands
-import config
+import asyncio
+import youtube_dl
+import os
+from config import Config
 
-cfg = config.load_config()
+cfg = Config()
 
 
-def get_prefix(bot, msg):
+def get_prefix(target_bot, msg):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
-    prefixes = [cfg['prefix']]
-    return commands.when_mentioned_or(*prefixes)(bot, msg)
+    prefixes = [cfg.params['prefix']]
+    return commands.when_mentioned_or(*prefixes)(target_bot, msg)
 
 
 bot = commands.Bot(command_prefix=get_prefix, description='Multipurpose Discord Bot')
-exts = cfg['extensions']
+exts = cfg.params['extensions']
 
 
 @bot.event
@@ -29,4 +32,4 @@ async def _eval(msg, *, cmd):
 for i in exts:
     bot.load_extension(i)
 
-bot.run(cfg['token'])
+bot.run(cfg.params['token'])
