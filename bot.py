@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
-import asyncio
-import youtube_dl
-import os
 from config import Config
+import logging
 
+
+logging.basicConfig(level=logging.INFO)
 cfg = Config()
 
 
@@ -20,7 +20,7 @@ exts = cfg.params['extensions']
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='Cassino Águias'))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.streaming, name='Cassino Águias  | !help'))
     print(bot.user.name, 'loaded')
 
 
@@ -32,4 +32,5 @@ async def _eval(msg, *, cmd):
 for i in exts:
     bot.load_extension(i)
 
+logging.getLogger('main').info('Starting Bot')
 bot.run(cfg.params['token'])
